@@ -19,7 +19,7 @@ public class DefaultFestivalReviewController implements FestivalReviewController
 
 	@Override
 	public List<Review> fetchReviews(String concertName) {
-		log.info("Controller: concertName={}", concertName);
+		log.info("Controller: concertName = {}", concertName);
 		return festivalReviewService.fetchReviews(concertName);
 	}
 

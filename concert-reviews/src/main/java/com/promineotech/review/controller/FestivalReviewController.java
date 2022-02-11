@@ -57,7 +57,7 @@ public interface FestivalReviewController {
 					@Parameter(
 							name = "concertName",
 							allowEmptyValue = false,
-							required = false,
+							required = true,
 							description = "The concert name (i.e., 'Decadence AZ')")
 			}
 		)

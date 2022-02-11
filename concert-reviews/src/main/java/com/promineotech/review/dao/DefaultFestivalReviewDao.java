@@ -24,7 +24,7 @@ public class DefaultFestivalReviewDao implements FestivalReviewDao {
 
 	@Override
 	public List<Review> fetchReviews(String concertName) {
-		log.info("DAO: concertName={}", concertName);
+		log.info("DAO: concertName = {}", concertName);
 		
 		// @formatter:off
 		String sql = ""

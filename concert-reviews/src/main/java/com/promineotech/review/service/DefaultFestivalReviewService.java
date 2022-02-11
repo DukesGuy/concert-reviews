@@ -22,7 +22,7 @@ public class DefaultFestivalReviewService implements FestivalReviewService {
 	@Transactional(readOnly = true)
 	@Override
 	public List<Review> fetchReviews(String concertName) {
-		log.info("Service: concertName={}", concertName);
+		log.info("Service: concertName = {}", concertName);
 		
 		List<Review> reviews = festivalReviewDao.fetchReviews(concertName);
 		

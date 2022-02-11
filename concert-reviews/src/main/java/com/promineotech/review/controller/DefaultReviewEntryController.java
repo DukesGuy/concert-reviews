@@ -22,4 +22,16 @@ public class DefaultReviewEntryController implements ReviewEntryController {
 		return reviewEntryService.createReview(review);
 	}
 
+	@Override
+	public Review update(ReviewEntry review, Long reviewPK) {
+		log.info("Controller: Updating review id = {}, {}", reviewPK, review);
+		return reviewEntryService.update(review, reviewPK);
+	}
+
+	@Override
+	public Review delete(Long reviewPK) {
+		log.info("Controller: Deleting review id = {}", reviewPK);
+		return reviewEntryService.delete(reviewPK);
+	}
+
 }

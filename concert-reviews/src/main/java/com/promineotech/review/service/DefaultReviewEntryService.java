@@ -44,16 +44,47 @@ public class DefaultReviewEntryService implements ReviewEntryService {
 				soundRating, foodRating, restroomRating, merchRating, parkingRating, 
 				securityRating, attractionsRating, comments);
 	}
+	
+	@Override
+	@Transactional
+	public Review update(ReviewEntry review, Long reviewPK) {
+		log.info("Service: Updating review id = {}: {}", reviewPK, review);
+		
+		Concert concert = getConcert(review);
+		Attendee attendee = getAttendee(review);
+		Date datePosted = review.getDatePosted();
+		int productionRating = review.getProductionRating();
+		int soundRating = review.getSoundRating();
+		int foodRating = review.getFoodRating();
+		int restroomRating = review.getRestroomRating();
+		int merchRating = review.getMerchRating();
+		int parkingRating = review.getParkingRating();
+		int securityRating = review.getSecurityRating();
+		int attractionsRating = review.getAttractionsRating();
+		String comments = review.getComments();
+		
+		return reviewEntryDao.updateReview(reviewPK, concert, attendee, datePosted, productionRating, 
+				soundRating, foodRating, restroomRating, merchRating, parkingRating, 
+				securityRating, attractionsRating, comments);
+	}
+	
+	@Override
+	@Transactional
+	public Review delete(Long reviewPK) {
+		log.info("Service: Deleting review id = {}", reviewPK);
+		
+		return reviewEntryDao.delete(reviewPK);
+	}
 
 	private Attendee getAttendee(ReviewEntry reviewEntry) {
 		return reviewEntryDao.fetchAttendee(reviewEntry.getAttendeeId())
-				.orElseThrow(() -> new NoSuchElementException("Attendee with ID="
+				.orElseThrow(() -> new NoSuchElementException("Attendee with ID = "
 			            + reviewEntry.getAttendeeId() + " was not found"));
 	}
 
 	private Concert getConcert(ReviewEntry reviewEntry) {
 		return reviewEntryDao.fetchConcert(reviewEntry.getConcertId())
-				.orElseThrow(() -> new NoSuchElementException("Concert with name="
+				.orElseThrow(() -> new NoSuchElementException("Concert with name = "
 			            + reviewEntry.getConcertId() + " was not found"));
 	}
 

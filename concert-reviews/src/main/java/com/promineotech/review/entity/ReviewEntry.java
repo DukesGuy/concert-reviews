@@ -71,4 +71,5 @@ public class ReviewEntry {
 	@Pattern(regexp = "[\\w\\s]*")
 	private String comments;
 
+
 }

@@ -28,4 +28,5 @@ public class Review {
 	public Long getReviewPK() {
 		return reviewPK;
 	}
+
 }
