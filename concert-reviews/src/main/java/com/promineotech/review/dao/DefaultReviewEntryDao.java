@@ -235,7 +235,7 @@ public class DefaultReviewEntryDao implements ReviewEntryDao {
 			return Concert.builder()
 					.concertName(rs.getString("concert_name"))
 					.venueId(rs.getLong("venue_id"))
-					.dateId(rs.getDate("date_id"))
+					.dateId(rs.getString("date_id"))
 					.organizer(rs.getString("organizer"))
 					.build();
 			// @formatter:on

@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.promineotech.review.dao.FestivalReviewDao;
+import com.promineotech.review.entity.Concert;
 import com.promineotech.review.entity.Review;
+import com.promineotech.review.entity.Venue;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -32,6 +34,35 @@ public class DefaultFestivalReviewService implements FestivalReviewService {
 		}
 		
 		return reviews;
+	}
+	
+	@Transactional
+	@Override
+	public List<Concert> fetchConcerts(String state) {
+		log.info("Service: state = {}", state);
+		
+		List<Concert> concerts = festivalReviewDao.fetchConcerts(state);
+		
+		if(concerts.isEmpty()) {
+			String msg = String.format("No concerts were found in %s", state);
+			throw new NoSuchElementException(msg);
+		}
+		
+		return concerts;
+	}
+
+	@Override
+	public List<Venue> fetchVenues(String concertName) {
+		log.info("Service: concertName = {}", concertName);
+		
+		List<Venue> venues = festivalReviewDao.fetchVenues(concertName);
+		
+		if(venues.isEmpty()) {
+			String msg = String.format("No venues were found for %s", concertName);
+			throw new NoSuchElementException(msg);
+		}
+		
+		return venues;
 	}
 
 }

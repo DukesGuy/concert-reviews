@@ -47,7 +47,7 @@ public interface ReviewEntryController {
 					content = { @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = Review.class))}),
 			@ApiResponse(responseCode = "500", description = "Internal server error", content = @Content)
 	})
-	@PutMapping("/{reviewId}")
+	@PutMapping("/update")
 	@ResponseStatus(code = HttpStatus.OK)
 	Review update(@Valid @RequestBody ReviewEntry review, 
 			@Parameter (description = "Review id to be updated")
@@ -62,7 +62,7 @@ public interface ReviewEntryController {
 					content = { @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = Review.class))}),
 			@ApiResponse(responseCode = "500", description = "Internal server error", content = @Content)
 	})
-	@DeleteMapping("/{reviewId}")
+	@DeleteMapping("/delete")
 	@ResponseStatus(code = HttpStatus.OK)
 	Review delete(
 			@Parameter(description = "Review id to be deleted") 

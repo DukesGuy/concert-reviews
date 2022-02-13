@@ -1,6 +1,7 @@
 package com.promineotech.review.entity;
 
-import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Builder;
 import lombok.Data;
@@ -8,9 +9,13 @@ import lombok.Data;
 @Data
 @Builder
 public class Concert {
-	private Long concertPK;
 	private String concertName;
 	private Long venueId;
-	private Date dateId;
+	private String dateId;
 	private String organizer;
+	
+	@JsonIgnore
+	public Long getVenueId() {
+		return venueId;
+	}
 }

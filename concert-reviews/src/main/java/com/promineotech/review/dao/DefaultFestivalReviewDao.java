@@ -11,7 +11,9 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 
+import com.promineotech.review.entity.Concert;
 import com.promineotech.review.entity.Review;
+import com.promineotech.review.entity.Venue;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -53,6 +55,70 @@ public class DefaultFestivalReviewDao implements FestivalReviewDao {
 						.securityRating(rs.getInt("security_rating"))
 						.attractionsRating(rs.getInt("attractions_rating"))
 						.comments(rs.getString("comments"))
+						.build();
+				// @formatter:on
+			}
+			
+		});
+	}
+
+	@Override
+	public List<Concert> fetchConcerts(String state) {
+		log.info("DAO: state = {}", state);
+		
+		// @formatter:off
+		String sql = ""
+				+ "SELECT concerts.* "
+				+ "FROM concerts "
+				+ "INNER JOIN venues "
+				+ "ON concerts.venue_id = venues.venue_pk "
+				+ "WHERE venues.state = :state";
+		// @formatter:on
+		
+		Map<String, Object> parms = Map.of("state", state.toString());
+		
+		return jdbcTemplate.query(sql, parms, new RowMapper<Concert>() {
+			@Override
+			public Concert mapRow(ResultSet rs, int rowNum) throws SQLException {
+				// @formatter:off
+				return Concert.builder()
+						.concertName(rs.getString("concert_name"))
+						.venueId(rs.getObject("venue_id", Long.class))
+						.dateId(rs.getString("date_id"))
+						.organizer(rs.getString("organizer"))
+						.build();
+				// @formatter:on
+			}
+			
+		});
+	}
+
+	@Override
+	public List<Venue> fetchVenues(String concertName) {
+		log.info("DAO: concertName = {}", concertName);
+		
+		// @formatter:off
+		String sql = ""
+				+ "SELECT venues.* "
+				+ "FROM venues "
+				+ "INNER JOIN concerts "
+				+ "ON concerts.venue_id = venues.venue_pk "
+				+ "WHERE concerts.concert_name = :concert_name";
+		// @formatter:on
+		
+		Map<String, Object> parms = Map.of("concert_name", concertName.toString());
+		
+		return jdbcTemplate.query(sql, parms, new RowMapper<Venue>() {
+			@Override
+			public Venue mapRow(ResultSet rs, int rowNum) throws SQLException {
+				// @formatter:off
+				return Venue.builder()
+						.venuePK(rs.getObject("venue_pk", Long.class))
+						.venueName(rs.getString("venue_name"))
+						.street(rs.getString("street"))
+						.city(rs.getString("city"))
+						.state(rs.getString("state"))
+						.zip(rs.getString("zip"))
 						.build();
 				// @formatter:on
 			}

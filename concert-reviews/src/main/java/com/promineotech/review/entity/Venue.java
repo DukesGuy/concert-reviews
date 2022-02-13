@@ -1,5 +1,7 @@
 package com.promineotech.review.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Builder;
 import lombok.Data;
 
@@ -12,4 +14,9 @@ public class Venue {
 	private String city;
 	private String state;
 	private String zip;
+	
+	@JsonIgnore
+	public Long getVenuePK() {
+		return venuePK;
+	}
 }

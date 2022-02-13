@@ -37,7 +37,7 @@ class ReviewEntryTest {
 	void testCreateReviewReturnsSuccess201() {
 		// Given: a body and REST URI
 		String body = createOrderBody();
-		String uri = String.format("http://localhost:%d/entry", serverPort);
+		String uri = String.format("http://localhost:%d/reviews", serverPort);
 		
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
