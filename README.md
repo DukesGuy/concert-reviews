@@ -1,6 +1,6 @@
 # concert-reviews
 REST API for a concert/festival review web application
 
-## Entity Relationship Diagram (old)
+## Entity Relationship Diagram
 
 ![alt text](https://github.com/DukesGuy/concert-reviews/blob/main/ConcertReview-ERDiagram.png?raw=true)
