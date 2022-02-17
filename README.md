@@ -2,7 +2,7 @@
 REST API for a concert/festival review web application
 
 ## OpenAPI Documentation
-![alt text](https://ibb.co/7yFVpdY)
+![alt text](https://i.ibb.co/Lpf6gXk/Screen-Shot-2022-02-16-at-4-57-32-PM.png)
 
 ## Entity Relationship Diagram
 
